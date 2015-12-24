@@ -19,12 +19,15 @@ class Stadium extends Migration
             $table->double("rating");
             $table->string("image", 500);
             $table->string("describe", 1500);
+            $table->string("tel", 50);
+            $table->string("link");
+            $table->string("time_open");
+            $table->string("time_close");
             $table->double("latitude");
             $table->double("longitude");
             $table->softDeletes();
             $table->timestamps();
         });
-
     }
 
     /**
