@@ -19,4 +19,7 @@ Route::get('/', function () {
 Route::get('/retrofit', 'RetrofitController@getRetrofit');
 Route::post('/auth','AuthController@Auth');
 
-Route::get('/all/{id}/{type}', 'ReserveController@getAll');
+Route::get('/stadium/all/{id}/{type}', 'StadiumController@getAll');
+Route::get('/stadium/{id}/{type}', 'StadiumController@getStadiumDetail');
+
+Route::post('/reserve', 'ReserveController@Reserve');

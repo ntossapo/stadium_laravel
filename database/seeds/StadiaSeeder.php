@@ -17,11 +17,11 @@ class StadiaSeeder extends Seeder
             'image' => 'http://static.sportskeeda.com/wp-content/uploads/2014/03/old-trafford-2150165.jpg',
             'describe' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'tel'=> '0950764133',
-            'link' => 'www.google.com',
+            'link' => 'http://www.txparkphuket.com/',
             'time_open' => '09:00',
             'time_close' => '02:00',
-            'latitude'=> 0.0,
-            'longitude'=> 0.0,
+            'latitude'=> 7.905612,
+            'longitude'=> 98.384058,
         ]);
 
 
@@ -34,8 +34,8 @@ class StadiaSeeder extends Seeder
             'link' => 'www.google.com',
             'time_open' => '09:00',
             'time_close' => '02:00',
-            'latitude'=> 0.0,
-            'longitude'=> 0.0,
+            'latitude'=> 7.895174,
+            'longitude'=> 98.354034,
         ]);
     }
 }
