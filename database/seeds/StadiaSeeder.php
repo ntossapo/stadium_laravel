@@ -37,5 +37,18 @@ class StadiaSeeder extends Seeder
             'latitude'=> 7.895174,
             'longitude'=> 98.354034,
         ]);
+
+        DB::table('stadiums')->insert([
+            'name' => 'Mock Stadium 1',
+            'rating' => 0.0,
+            'image'=>'http://www.burohappold.com/fileadmin/_processed_/csm_Aviva_Stadium_inside_57c3789e99.jpg',
+            'describe' => 'Morbi id lorem scelerisque, vulputate mauris sed, sollicitudin dui.',
+            'tel'=> '0950764133',
+            'link' => 'www.google.com',
+            'time_open' => '09:00',
+            'time_close' => '02:00',
+            'latitude'=> 7.895174,
+            'longitude'=> 98.354034,
+        ]);
     }
 }
