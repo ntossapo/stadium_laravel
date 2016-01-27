@@ -17,12 +17,12 @@ class PrereserveTester extends TestCase
     }
 
     public function testRequestPreReserverAssertResponseOk(){
-        $res = $this->post("/prereserve", ["stadium"=>"1", "time_to"=>"10.00", "time_from"=>"09.00", "type"=>"soccer"]);
+        $res = $this->post("/prereserve", ["stadium"=>"1", "time_to"=>"10.00", "time_from"=>"09.00", "type"=>"soccer", "date"=>"2559-01-10"]);
         $res->assertResponseOk();
     }
 
     public function testRequestPreReserveAssertReponseJson(){
-        $res = $this->post("/prereserve", ["stadium"=>"1", "time_to"=>"10.00", "time_from"=>"09.00", "type"=>"soccer"]);
+        $res = $this->post("/prereserve", ["stadium"=>"1", "time_to"=>"10.00", "time_from"=>"09.00", "type"=>"soccer", "date"=>"2559-01-10"]);
         $res->seeJsonContains(["status"=>"ok"]);
     }
 
