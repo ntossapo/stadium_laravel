@@ -15,7 +15,7 @@ class Reserve extends Migration
         Schema::create('reserves', function(Blueprint $table){
             $table->increments("id");
             $table->string("facebook_id");
-            $table->string("field");
+            $table->string("field_id");
             $table->date("date");
             $table->time("time_from");
             $table->time("time_to");

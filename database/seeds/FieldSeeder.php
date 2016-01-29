@@ -46,5 +46,17 @@ class FieldSeeder extends Seeder
             'stadium_id' => 2,
             'type' => 'badminton'
         ]);
+
+        DB::table('fields')->insert([
+            'name' => 'Soccer 1',
+            'stadium_id' => 3,
+            'type' => 'soccer'
+        ]);
+
+        DB::table('fields')->insert([
+            'name' => 'Soccer 2',
+            'stadium_id' => 3,
+            'type' => 'soccer'
+        ]);
     }
 }
