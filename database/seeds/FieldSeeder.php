@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+
 class FieldSeeder extends Seeder
 {
     /**
