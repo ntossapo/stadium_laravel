@@ -10,6 +10,6 @@ class Reserve extends Model
     use SoftDeletes;
     protected $table = 'reserves';
     public $timestamps = true;
-    public $fillable = ['user', 'field', 'time_to', 'time_from', 'date'];
+    public $fillable = ['user', 'field_id', 'time_to', 'time_from', 'date'];
     protected $dates = ['deleted_at'];
 }
