@@ -13,7 +13,7 @@ class JoinSeeder extends Seeder
     {
         DB::table('joins')->insert([
            'reserve_id' => '3',
-            'user_id' => '10200830413918895'
+            'facebook_id' => '10200830413918895'
         ]);
     }
 }

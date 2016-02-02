@@ -15,7 +15,7 @@ class Join extends Migration
         Schema::create('joins', function(Blueprint $table){
             $table->increments("id");
             $table->integer("reserve_id");
-            $table->string("user_id");
+            $table->string("facebook_id");
             $table->timestamps();
             $table->softDeletes();
         });
