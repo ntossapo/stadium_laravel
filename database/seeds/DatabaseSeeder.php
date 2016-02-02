@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FieldSeeder::class);
         $this->call(StadiaSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(JoinSeeder::class);
         Model::reguard();
     }
 }
