@@ -16,10 +16,11 @@ class QuickController extends Controller
         $user = Input::get("facebookId");
 
         $data = DB::select('
-            SELECT RESERVES.*, STADIUMS.NAME, STADIUMS.LATITUDE, STADIUMS.LONGITUDE, FIELDS.NAME
-            , (SELECT COUNT(JOINS.FACEBOOK_ID) FROM JOINS WHERE JOINS.FACEBOOK_ID = :facebook2) AS ISJOINED
-            FROM RESERVES, STADIUMS, FIELDS
+            SELECT RESERVES.*, STADIUMS.NAME as stadiumName, STADIUMS.LATITUDE as latitude, STADIUMS.LONGITUDE as longitude, FIELDS.NAME as fieldName, STADIUMS.IMAGE as image, USERS.NAME as username
+            , (SELECT COUNT(JOINS.FACEBOOK_ID) FROM JOINS WHERE JOINS.FACEBOOK_ID = :facebook2) AS isJoin
+            FROM RESERVES, STADIUMS, FIELDS, USERS
             WHERE
+              USERS.FACEBOOK_ID = RESERVES.FACEBOOK_ID AND
               RESERVES.FACEBOOK_ID != :facebook AND
               RESERVES.FIELD_ID = FIELDS.ID AND
               FIELDS.STADIUM_ID = STADIUMS.ID AND
@@ -29,12 +30,12 @@ class QuickController extends Controller
         ', ["lat"=>$lat, "long"=>$long, "type"=>$type, "facebook"=>$user, "facebook2"=>$user]);
 
         foreach($data as $key=>$val){
-            if($val->ISJOINED == 1) {
+            if($val->isJoin == 1) {
                 unset($data[$key]);
                 continue;
             }
             $users = DB::SELECT('
-                SELECT USERS.NAME
+                SELECT USERS.NAME as name
                 FROM USERS, JOINS
                 WHERE
                   JOINS.RESERVE_ID = :reserveId AND
