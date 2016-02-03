@@ -29,4 +29,5 @@ Route::get('/prereserve', 'ReserveController@testMyReserve');
 
 Route::get('/test', 'ReserveController@getAllField');
 
-Route::post('/quickmatch', 'quickController@getQuickMatch');
+Route::post('/quickmatch', 'QuickController@getQuickMatch');
+Route::post('/quickmatch/join', 'QuickController@joinQuickMatch');
