@@ -33,4 +33,21 @@ class PlayFriendController extends Controller
 
         return response()->json(["status"=>"ok", "data"=>$match]);
     }
+
+    public function joinFriendMatch(){
+        $facebook_id = Input::get("facebook_id");
+        $reserve_id = Input::get("reserve_id");
+        $exist = Join::where("facebook_id", "=", $facebook_id)
+            ->where("reserve_id", "=", $reserve_id)->count();
+
+        if($exist == 0){
+            $join = new Join();
+            $join->facebook_id = $facebook_id;
+            $join->reserve_id = $reserve_id;
+            $join->save();
+            return response()->json(["status"=>"ok"]);
+        }else{
+            return response()->json(["status"=>"err", "err"=>"join exist"]);
+        }
+    }
 }

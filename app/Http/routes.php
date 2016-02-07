@@ -33,3 +33,4 @@ Route::post('/quickmatch', 'QuickController@getQuickMatch');
 Route::post('/quickmatch/join', 'QuickController@joinQuickMatch');
 
 Route::post('/friendplay', 'PlayFriendController@getMatch');
+Route::post('/friendplay/join', 'PlayFriendController@joinFriendMatch');
