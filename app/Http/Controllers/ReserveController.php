@@ -78,9 +78,11 @@ class ReserveController extends Controller
             $params["id".$i] = $busyField[$i]->id;
 
         }
-        $query .= 'FIELDS.TYPE = :type AND STADIUMS.ID = FIELDS.STADIUM_ID AND STADIUMS.ID = :stdid';
+        $query .= 'FIELDS.TYPE = :type AND
+         STADIUMS.ID = FIELDS.STADIUM_ID AND
+          STADIUMS.ID = :stdid';
         $params["type"] = 'soccer';
-        $params["stdid"] = 1;
+        $params["stdid"] = $stadium;
         $freeStadium = DB::select($query, $params);
 
         return response()->json(["status"=>"ok", "data"=> $freeStadium]);
@@ -105,7 +107,4 @@ class ReserveController extends Controller
         return response()->json(["status"=>"ok", "data"=>$all]);
     }
 
-    public function testMyReserve(){
-
-    }
 }
