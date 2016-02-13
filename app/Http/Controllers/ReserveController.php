@@ -100,11 +100,10 @@ class ReserveController extends Controller
             RESERVES.FACEBOOK_ID = :facebookId AND
             RESERVES.FIELD_ID = FIELDS.ID AND
             FIELDS.STADIUM_ID = STADIUMS.ID AND
-            RESERVES.DATE >= NOW()
+            RESERVES.DATE >= CURDATE()
         ORDER BY
-            RESERVES.DATE DESC
+            RESERVES.DATE ASC
         ', ["facebookId" => $facebookId]);
         return response()->json(["status"=>"ok", "data"=>$all]);
     }
-
 }

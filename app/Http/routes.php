@@ -19,8 +19,9 @@ Route::get('/', function () {
 Route::get('/retrofit', 'RetrofitController@getRetrofit');
 Route::post('/auth','AuthController@Auth');
 
-Route::get('/stadium/all/{id}/{type}', 'StadiumController@getAll');
+Route::get('/stadium/all/{id}/{type}/{lat}/{lng}', 'StadiumController@getAll');
 Route::get('/stadium/{id}/{type}', 'StadiumController@getStadiumDetail');
+Route::post('/stadium/reserve', 'StadiumController@getAllReserveOfStadium');
 
 Route::post('/reserve', 'ReserveController@Reserve');
 Route::post('/prereserve', 'ReserveController@preReserve');
@@ -33,3 +34,6 @@ Route::post('/quickmatch/join', 'QuickController@joinQuickMatch');
 
 Route::post('/friendplay', 'PlayFriendController@getMatch');
 Route::post('/friendplay/join', 'PlayFriendController@joinFriendMatch');
+
+Route::post('/myjoin', 'JoinController@getMyJoin');
+Route::post('/myjoin/delete', 'JoinController@deleteMyJoin');

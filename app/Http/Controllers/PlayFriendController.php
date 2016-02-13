@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+
 use Input;
 use DB;
 class PlayFriendController extends Controller
@@ -14,6 +13,8 @@ class PlayFriendController extends Controller
         $friends = json_decode(Input::get("friends"));
         $user = Input::get("facebook_id");
         $type = Input::get("type");
+        $lat = Input::get("lat");
+        $lng = Input::get("lng");
         $match = array();
         foreach((array)$friends as $friend){
             $result = DB::select('

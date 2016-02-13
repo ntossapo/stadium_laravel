@@ -25,6 +25,7 @@ class QuickController extends Controller
               RESERVES.FIELD_ID = FIELDS.ID AND
               FIELDS.STADIUM_ID = STADIUMS.ID AND
               FIELDS.TYPE = :type AND
+              reserves.isConfirm = 1 AND
               RESERVES.DATE >= CURDATE()
               ORDER BY SQRT(POW(STADIUMS.LATITUDE - :lat, 2) + POW(STADIUMS.LONGITUDE - :long, 2)) ASC, RESERVES.DATE ASC, RESERVES.TIME_FROM ASC
         ', ["lat"=>$lat, "long"=>$long, "type"=>$type, "facebook"=>$user, "facebook2"=>$user]);
