@@ -44,25 +44,25 @@ class ReserveController extends Controller
         $date = Input::get("date");
 
         $busyField = DB::select('
-            SELECT FIELDS.*
-            FROM FIELDS, RESERVES, STADIUMS
-            WHERE
-              STADIUMS.ID = :id AND
-              STADIUMS.ID = FIELDS.STADIUM_ID AND
-              FIELDS.ID = RESERVES.FIELD_ID AND
-              RESERVES.DATE = :date AND
+            select fields.*
+            from fields, reserves, stadiums
+            where
+              stadiums.id = :id and
+              stadiums.id = fields.stadium_id and
+              fields.id = reserves.field_id and
+              reserves.date = :date and
               (
-                (:time_from1 > RESERVES.TIME_FROM AND :time_from2 < RESERVES.TIME_TO) OR
-                (:time_to1  > RESERVES.TIME_FROM AND :time_to2 < RESERVES.TIME_TO) OR
+                (:time_from1 > reserves.time_from and :time_from2 < reserves.time_to) or
+                (:time_to1  > reserves.time_from and :time_to2 < reserves.time_to) or
                 (
-                  (RESERVES.TIME_FROM > :time_from3 AND RESERVES.TIME_FROM < :time_to3) AND
-                  (RESERVES.TIME_TO > :time_from4 AND RESERVES.TIME_TO < :time_to4)
-                )OR
-                (RESERVES.TIME_FROM = :time_from5 AND RESERVES.TIME_TO = :time_to5) OR
-                (RESERVES.TIME_FROM = :time_from6 AND RESERVES.TIME_TO != :time_to6) OR
-                (RESERVES.TIME_FROM != :time_from7 AND RESERVES.TIME_TO = :time_to7)
-              ) AND
-              FIELDS.type = :type
+                  (reserves.time_from > :time_from3 and reserves.time_from < :time_to3) and
+                  (reserves.time_to > :time_from4 and reserves.time_to < :time_to4)
+                )or
+                (reserves.time_from = :time_from5 and reserves.time_to = :time_to5) or
+                (reserves.time_from = :time_from6 and reserves.time_to != :time_to6) or
+                (reserves.time_from != :time_from7 and reserves.time_to = :time_to7)
+              ) and
+              fields.type = :type
         ', ["id"=>$stadium, "date"=>$date,
             "time_from1"=>$timeFrom, "time_from2"=>$timeFrom, "time_from3"=>$timeFrom, "time_from4"=>$timeFrom, "time_from5"=>$timeFrom, "time_from6"=>$timeFrom, "time_from7"=>$timeFrom,
             "time_to1"=>$timeTo, "time_to2"=>$timeTo, "time_to3"=>$timeTo, "time_to4"=>$timeTo, "time_to5"=>$timeTo, "time_to6"=>$timeTo, "time_to7"=>$timeTo,
@@ -78,9 +78,9 @@ class ReserveController extends Controller
             $params["id".$i] = $busyField[$i]->id;
 
         }
-        $query .= 'FIELDS.TYPE = :type AND
-         STADIUMS.ID = FIELDS.STADIUM_ID AND
-          STADIUMS.ID = :stdid';
+        $query .= 'fields.type = :type and
+         stadiums.id = fields.stadium_id and
+          stadiums.id = :stdid';
         $params["type"] = 'soccer';
         $params["stdid"] = $stadium;
         $freeStadium = DB::select($query, $params);
@@ -92,17 +92,17 @@ class ReserveController extends Controller
     public function getMyReserve(){
         $facebookId = Input::get("facebookId");
         $all = DB::select('
-        SELECT
-            RESERVES.*, STADIUMS.NAME AS stadium_name, STADIUMS.latitude, STADIUMS.longitude, FIELDS.NAME AS field_name, STADIUMS.IMAGE as image
-        FROM
-            RESERVES, STADIUMS, FIELDS
-        WHERE
-            RESERVES.FACEBOOK_ID = :facebookId AND
-            RESERVES.FIELD_ID = FIELDS.ID AND
-            FIELDS.STADIUM_ID = STADIUMS.ID AND
-            RESERVES.DATE >= CURDATE()
-        ORDER BY
-            RESERVES.DATE ASC
+        select
+            reserves.*, stadiums.name as stadium_name, stadiums.latitude, stadiums.longitude, fields.name as field_name, stadiums.image as image
+        from
+            reserves, stadiums, fields
+        where
+            reserves.facebook_id = :facebookid and
+            reserves.field_id = fields.id and
+            fields.stadium_id = stadiums.id and
+            reserves.date >= curdate()
+        order by
+            reserves.date asc
         ', ["facebookId" => $facebookId]);
         return response()->json(["status"=>"ok", "data"=>$all]);
     }
