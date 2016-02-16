@@ -103,7 +103,7 @@ class ReserveController extends Controller
             reserves.date >= curdate()
         order by
             reserves.date asc
-        ', ["facebookId" => $facebookId]);
+        ', ["facebookid" => $facebookId]);
         return response()->json(["status"=>"ok", "data"=>$all]);
     }
 }
