@@ -16,18 +16,18 @@ class QuickController extends Controller
         $user = Input::get("facebookId");
 
         $data = DB::select('
-            SELECT RESERVES.*, STADIUMS.NAME as stadiumName, STADIUMS.LATITUDE as latitude, STADIUMS.LONGITUDE as longitude, FIELDS.NAME as fieldName, STADIUMS.IMAGE as image, USERS.NAME as username
-            , (SELECT COUNT(JOINS.FACEBOOK_ID) FROM JOINS WHERE JOINS.FACEBOOK_ID = :facebook2) AS isJoin
-            FROM RESERVES, STADIUMS, FIELDS, USERS
-            WHERE
-              USERS.FACEBOOK_ID = RESERVES.FACEBOOK_ID AND
-              RESERVES.FACEBOOK_ID != :facebook AND
-              RESERVES.FIELD_ID = FIELDS.ID AND
-              FIELDS.STADIUM_ID = STADIUMS.ID AND
-              FIELDS.TYPE = :type AND
-              reserves.isConfirm = 1 AND
-              RESERVES.DATE >= CURDATE()
-              ORDER BY SQRT(POW(STADIUMS.LATITUDE - :lat, 2) + POW(STADIUMS.LONGITUDE - :long, 2)) ASC, RESERVES.DATE ASC, RESERVES.TIME_FROM ASC
+            select reserves.*, stadiums.name as stadiumname, stadiums.latitude as latitude, stadiums.longitude as longitude, fields.name as fieldname, stadiums.image as image, users.name as username
+            , (select count(joins.facebook_id) from joins where joins.facebook_id = :facebook2) as isjoin
+            from reserves, stadiums, fields, users
+            where
+              users.facebook_id = reserves.facebook_id and
+              reserves.facebook_id != :facebook and
+              reserves.field_id = fields.id and
+              fields.stadium_id = stadiums.id and
+              fields.type = :type and
+              reserves.isconfirm = 1 and
+              reserves.date >= curdate()
+              order by sqrt(pow(stadiums.latitude - :lat, 2) + pow(stadiums.longitude - :long, 2)) asc, reserves.date asc, reserves.time_from asc
         ', ["lat"=>$lat, "long"=>$long, "type"=>$type, "facebook"=>$user, "facebook2"=>$user]);
 
         foreach($data as $key=>$val){
@@ -36,11 +36,11 @@ class QuickController extends Controller
                 continue;
             }
             $users = DB::SELECT('
-                SELECT USERS.NAME as name
-                FROM USERS, JOINS
-                WHERE
-                  JOINS.RESERVE_ID = :reserveId AND
-                  USERS.FACEBOOK_ID = JOINS.FACEBOOK_ID
+                select users.name as name
+                from users, joins
+                where
+                  joins.reserve_id = :reserveid and
+                  users.facebook_id = joins.facebook_id
             ', ["reserveId"=> $val->id]);
             $val->user = $users;
         }

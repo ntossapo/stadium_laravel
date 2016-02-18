@@ -50,15 +50,15 @@ class StadiumController extends Controller
         $type = Input::get('type');
 
         $selected = DB::select('
-        SELECT reserves.*, fields.name
-        FROM reserves, fields, stadiums
-        WHERE
-          stadiums.id = :id AND
-          fields.type = :type AND
-          stadiums.id = fields.stadium_id AND
-          reserves.field_id = fields.id AND
+        select reserves.*, fields.name
+        from reserves, fields, stadiums
+        where
+          stadiums.id = :id and
+          fields.type = :type and
+          stadiums.id = fields.stadium_id and
+          reserves.field_id = fields.id and
           reserves.date >= curdate()
-        ORDER BY
+        order by
           reserves.date asc
         ',["id"=>$id, "type"=>$type]);
 

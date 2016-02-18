@@ -18,30 +18,30 @@ class PlayFriendController extends Controller
         $match = array();
         foreach((array)$friends as $friend){
             $result = DB::select('
-                SELECT reserves.*, stadiums.name as stadiumName, stadiums.latitude as latitude,
-                 stadiums.longitude as longitude, fields.name as fieldName, stadiums.image as image,
+                select reserves.*, stadiums.name as stadiumname, stadiums.latitude as latitude,
+                 stadiums.longitude as longitude, fields.name as fieldname, stadiums.image as image,
                  users.name as username
-                From reserves, stadiums, fields, users
-                WHERE
-                  reserves.field_id = fields.id AND
-                  stadiums.id = fields.stadium_id AND
-                  reserves.facebook_id = users.facebook_id AND
-                  users.facebook_id != :self1 AND
-                  reserves.isConfirm = 1 AND
+                from reserves, stadiums, fields, users
+                where
+                  reserves.field_id = fields.id and
+                  stadiums.id = fields.stadium_id and
+                  reserves.facebook_id = users.facebook_id and
+                  users.facebook_id != :self1 and
+                  reserves.isconfirm = 1 and
                   fields.type = :type and
-                  NOT EXISTS (SELECT joins.facebook_id FROM joins WHERE joins.facebook_id = :self2) AND
-                  reserves.facebook_id = :friend AND
-                  reserves.date >= CURDATE()
-                  ORDER BY reserves.date ASC
+                  not exists (select joins.facebook_id from joins where joins.facebook_id = :self2) and
+                  reserves.facebook_id = :friend and
+                  reserves.date >= curdate()
+                  order by reserves.date asc
             ', ["self1"=>$user, "self2"=>$user, "friend"=>$friend->id, "type"=>$type]);
 
             foreach((array)$result as &$re){
                 $peoples = DB::select('
-                  SELECT USERS.NAME as name
-                  FROM USERS, JOINS
-                  WHERE
-                    JOINS.RESERVE_ID = :reserveId AND
-                    USERS.FACEBOOK_ID = JOINS.FACEBOOK_ID
+                  select users.name as name
+                  from users, joins
+                  where
+                    joins.reserve_id = :reserveid and
+                    users.facebook_id = joins.facebook_id
                 ', ["reserveId"=>$re->id]);
                 $re->user = $peoples;
                 array_push($match, $re);
