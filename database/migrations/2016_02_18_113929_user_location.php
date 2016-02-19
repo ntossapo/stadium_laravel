@@ -17,6 +17,7 @@ class UserLocation extends Migration
             $table->string("facebook_id");
             $table->double("latitude");
             $table->double("longitude");
+            $table->dateTime("last_used");
         });
     }
 
