@@ -68,13 +68,13 @@ class ReserveController extends Controller
             "time_to1"=>$timeTo, "time_to2"=>$timeTo, "time_to3"=>$timeTo, "time_to4"=>$timeTo, "time_to5"=>$timeTo, "time_to6"=>$timeTo, "time_to7"=>$timeTo,
             "type"=>$type]);
 
-        $query = "SELECT FIELDS.* FROM FIELDS, STADIUMS";
+        $query = "select fields.* from fields, stadiums";
         $params = [];
         $query .= ' WHERE ';
 
 
         for($i = 0 ; $i < count($busyField) ; $i++){
-            $query .= 'FIELDS.ID !=  :id' . $i . ' AND ';
+            $query .= 'fields.id !=  :id' . $i . ' AND ';
             $params["id".$i] = $busyField[$i]->id;
 
         }
