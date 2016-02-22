@@ -41,7 +41,7 @@ class QuickController extends Controller
                 where
                   joins.reserve_id = :reserveid and
                   users.facebook_id = joins.facebook_id
-            ', ["reserveId"=> $val->id]);
+            ', ["reserveid"=> $val->id]);
             $val->user = $users;
         }
         return response()->json(["status"=>"ok", "data"=>$data]);
