@@ -31,7 +31,7 @@ class QuickController extends Controller
         ', ["lat"=>$lat, "long"=>$long, "type"=>$type, "facebook"=>$user, "facebook2"=>$user]);
 
         foreach($data as $key=>$val){
-            if($val->isJoin == 1) {
+            if($val->isjoin == 1) {
                 unset($data[$key]);
                 continue;
             }
