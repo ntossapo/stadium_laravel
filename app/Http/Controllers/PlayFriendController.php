@@ -42,7 +42,7 @@ class PlayFriendController extends Controller
                   where
                     joins.reserve_id = :reserveid and
                     users.facebook_id = joins.facebook_id
-                ', ["reserveId"=>$re->id]);
+                ', ["reserveid"=>$re->id]);
                 $re->user = $peoples;
                 array_push($match, $re);
             }
