@@ -106,4 +106,15 @@ class ReserveController extends Controller
         ', ["facebookid" => $facebookId]);
         return response()->json(["status"=>"ok", "data"=>$all]);
     }
+
+    public function remove(){
+        $id = Input::get("id");
+        $reserve = Reserve::find($id);
+        if($reserve != null){
+            $reserve->delete();
+            return response()->json(["status"=>"ok"]);
+        }else{
+            return response()->json(["status"=>"err", "err"=>"not found"]);
+        }
+    }
 }

@@ -26,6 +26,7 @@ Route::post('/stadium/reserve', 'StadiumController@getAllReserveOfStadium');
 Route::post('/reserve', 'ReserveController@Reserve');
 Route::post('/prereserve', 'ReserveController@preReserve');
 Route::post('/myreserve', 'ReserveController@getMyReserve');
+Route::post('/myreserve/delete', 'ReserveController@remove');
 
 Route::get('/test', 'ReserveController@getAllField');
 
