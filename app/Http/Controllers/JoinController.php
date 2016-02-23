@@ -36,7 +36,7 @@ class JoinController extends Controller
         $id = Input::get("id");
         $item = Join::find($id);
         if($item != null) {
-            $item->delete();
+            $item->forceDelete();
             return response()->json(["status"=>"ok"]);
         }else
             return response()->json(["status"=>"err", "err"=>"not found"]);

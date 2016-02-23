@@ -111,7 +111,7 @@ class ReserveController extends Controller
         $id = Input::get("id");
         $reserve = Reserve::find($id);
         if($reserve != null){
-            $reserve->delete();
+            $reserve->forceDelete();
             return response()->json(["status"=>"ok"]);
         }else{
             return response()->json(["status"=>"err", "err"=>"not found"]);
