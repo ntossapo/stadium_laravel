@@ -27,9 +27,9 @@ class StadiumController extends Controller
             $count = DB::select('
 SELECT
 COUNT(*) as count
-from user_location
+from user_location, stadiums
 where
-sqrt(pow(7.899726666666667 - 7.895174, 2) + pow(98.35302000000001 - 98.354034, 2)) <= 0.0006');
+sqrt(pow(stadiums.latitude - user_location.latitude, 2) + pow(stadiums.longitude - user_location.longitude, 2)) <= 0.0006');
             $stadium->count = $count[0]->count;
             array_push($result, $stadium);
         }
