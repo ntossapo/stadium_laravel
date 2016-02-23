@@ -30,7 +30,7 @@ COUNT(*) as count
 from user_location
 where
 sqrt(pow(7.899726666666667 - 7.895174, 2) + pow(98.35302000000001 - 98.354034, 2)) <= 0.0006');
-            $stadium->count = $count->count;
+            $stadium->count = $count[0]->count;
             array_push($result, $stadium);
         }
 
