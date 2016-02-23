@@ -24,6 +24,13 @@ class StadiumController extends Controller
 
         foreach($resultSet as $object){
             $stadium = $object->stadium;
+            $count = DB::select('
+SELECT
+COUNT(*) as count
+from user_location
+where
+sqrt(pow(7.899726666666667 - 7.895174, 2) + pow(98.35302000000001 - 98.354034, 2)) <= 0.0006');
+            $stadium->count = $count;
             array_push($result, $stadium);
         }
 
