@@ -19,18 +19,19 @@ class StadiumController extends Controller
             ->join('stadiums', 'stadiums.id', '=', 'fields.stadium_id')
             ->select("fields.*")
             ->groupBy('fields.stadium_id')
-            ->orderBy(DB::raw('sqrt(pow(stadiums.latitude - '.$lat.', 2) - pow(stadiums.longitude - '. $lng .', 2))'), 'desc')
+            ->orderBy(DB::raw('sqrt(pow(stadiums.latitude - '.$lat.', 2) - pow(stadiums.longitude - '. $lng .', 2))'), 'asc')
             ->get();
 
         foreach($resultSet as $object){
             $stadium = $object->stadium;
             $count = DB::select('
-SELECT
-COUNT(*) as count
-from user_location, stadiums
-where
-sqrt(pow(stadiums.latitude - user_location.latitude, 2) + pow(stadiums.longitude - user_location.longitude, 2)) <= 0.0006
-and stadiums.id = :id', array(["id"=>$stadium->id]));
+		SELECT
+		COUNT(*) as count
+		from user_location, stadiums
+		where
+		sqrt(pow(stadiums.latitude - user_location.latitude, 2) + pow(stadiums.longitude - user_location.longitude, 2)) <= 0.0006 and 
+		stadiums.id = :id'
+		, array("id"=>$stadium->id));
             $stadium->count = intval($count[0]->count);
             array_push($result, $stadium);
         }
