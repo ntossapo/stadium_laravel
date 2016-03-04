@@ -30,7 +30,7 @@ COUNT(*) as count
 from user_location, stadiums
 where
 sqrt(pow(stadiums.latitude - user_location.latitude, 2) + pow(stadiums.longitude - user_location.longitude, 2)) <= 0.0006
-and stadiums.id = :id', array(["id"=>$stadium->id]));
+and stadiums.id = :id', array("id"=>$stadium->id));
             $stadium->count = intval($count[0]->count);
             array_push($result, $stadium);
         }
