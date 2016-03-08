@@ -20,6 +20,7 @@ class Reserve extends Migration
             $table->time("time_from");
             $table->time("time_to");
             $table->boolean("isConfirm");
+            $table->boolean("isCheckIn");
             $table->timestamps();
             $table->softDeletes();
         });
