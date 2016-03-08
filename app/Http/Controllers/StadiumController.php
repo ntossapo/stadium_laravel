@@ -19,7 +19,7 @@ class StadiumController extends Controller
             ->join('stadiums', 'stadiums.id', '=', 'fields.stadium_id')
             ->select("fields.*")
             ->groupBy('fields.stadium_id')
-            ->orderBy(DB::raw('sqrt(pow(stadiums.latitude - '.$lat.', 2) - pow(stadiums.longitude - '. $lng .', 2))'), 'asc')
+            ->orderBy(DB::raw('sqrt(pow(stadiums.latitude - '.$lat.', 2) - pow(stadiums.longitude - '. $lng .', 2))'), 'desc')
             ->get();
 
         foreach($resultSet as $object){
