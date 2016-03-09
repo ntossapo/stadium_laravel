@@ -51,7 +51,7 @@ class FriendController extends Controller
                 'facebookid4'=>$user->facebook_id
             ]
         );
-
+        
         $user->reservesAndPlay = $result[0]->reservesAndPlay;
         $user->reservesAndMiss = $result[0]->reservesAndMiss;
         $user->allReserves = $result[0]->allReserves;
