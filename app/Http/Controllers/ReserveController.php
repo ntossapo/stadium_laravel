@@ -117,4 +117,32 @@ class ReserveController extends Controller
             return response()->json(["status"=>"err", "err"=>"not found"]);
         }
     }
+
+    public function AvailableToReserve(){
+        $id = Input::get("id");
+        $result = DB::select('
+            SELECT reserves.id FROM reserves 
+            WHERE 
+              reserves.facebook_id = :facebookid AND 
+              datediff(now(), reserves.date) <= 0
+        ', ['facebookid'=>$id]);
+        if(count($result) > 5){
+            return response()->json(["status"=>"err", "err"=>"คุณไม่สามารถจองเพิ่มได้ คุณสามารถจองได้ 5 ครั้งพร้อมๆกัน"]);
+        }
+
+        $result = DB::select('
+            SELECT reserves.* FROM reserves
+            WHERE 
+              reserves.facebook_id = :facebookid AND
+              datediff(now(), reserves.date) > 0 AND 
+              datediff(now(), reserves.date) < 15 AND
+              reserves.isCheckIn = 0
+        ', ['facebookid'=>$id]);
+        if(count($result) > 0){
+            return response()->json(["status"=>"err", "err"=>"คุณไม่สามารถจองเพิ่มได้ คุณสามารถจองได้ 5 ครั้งพร้อมๆกัน"]);
+        }
+
+        return response()->json(["status"=>"ok"]);
+
+    }
 }
