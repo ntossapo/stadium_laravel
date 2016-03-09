@@ -139,7 +139,7 @@ class ReserveController extends Controller
               reserves.isCheckIn = 0
         ', ['facebookid'=>$id]);
         if(count($result) > 0){
-            return response()->json(["status"=>"err", "err"=>"คุณไม่สามารถจองเพิ่มได้ คุณสามารถจองได้ 5 ครั้งพร้อมๆกัน"]);
+            return response()->json(["status"=>"err", "err"=>"คุณติดแบลคลิสเนื่องจากคุณไม่ได้เช็คอินการจองของคุณ"]);
         }
 
         return response()->json(["status"=>"ok"]);
