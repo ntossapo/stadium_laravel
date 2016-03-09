@@ -51,10 +51,10 @@ class FriendController extends Controller
             ]
         );
 
-        $user->reservesAndPlay = $result->reservesAndPlay;
-        $user->reservesAndMiss = $result->reservesAndMiss;
-        $user->allReserves = $result->allReserves;
-        $user->allJoin = $result->allJoin;
+        $user->reservesAndPlay = $result[0]->reservesAndPlay;
+        $user->reservesAndMiss = $result[0]->reservesAndMiss;
+        $user->allReserves = $result[0]->allReserves;
+        $user->allJoin = $result[0]->allJoin;
         return response()->json(['status'=>'ok', 'data'=>$user]);
     }
 }
