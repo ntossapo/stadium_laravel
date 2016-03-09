@@ -23,15 +23,15 @@ class PlayFriendController extends Controller
                  users.name as username
                 from reserves, stadiums, fields, users
                 where
+                  users.facebook_id = reserves.facebook_id and
+                  reserves.facebook_id != :self2 and
                   reserves.field_id = fields.id and
-                  stadiums.id = fields.stadium_id and
-                  reserves.facebook_id = users.facebook_id and
-                  users.facebook_id != :self1 and
-                  reserves.isconfirm = 1 and
+                  fields.stadium_id = stadiums.id and
                   fields.type = :type and
-                  not exists (select joins.facebook_id from joins where joins.facebook_id = :self2) and
-                  reserves.facebook_id = :friend and
-                  reserves.date >= curdate()
+                  reserves.isconfirm = 1 and
+                  reserves.date >= curdate() and
+                  (select count(*) from joins where joins.reserve_id = reserves.id and joins.facebook_id = :self1) != 1
+                  reserves.facebook_id = :friend
                   order by reserves.date asc
             ', ["self1"=>$user, "self2"=>$user, "friend"=>$friend->id, "type"=>$type]);
 
