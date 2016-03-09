@@ -13,7 +13,7 @@ class FriendController extends Controller
 {
     public function getFriendStat(){
         $friendId = Input::get("id");
-        $user = User::where("facebook_id", "=", $friendId);
+        $user = User::where("facebook_id", $friendId);
         if(count($user) == 0)
             return response()->json(["status"=>"err", "err"=>"user not found"]);
 
