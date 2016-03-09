@@ -30,7 +30,8 @@ class FriendController extends Controller
               FROM reserves
               WHERE reserves.facebook_id = :facebookid2 AND
               reserves.isConfirm = 1 AND 
-              reserves.isCheckIn = 0)
+              reserves.isCheckIn = 0) AND
+              datediff(now(), reserves.date) > 0
               AS reservesAndMiss,
               
               (SELECT COUNT(*) 
