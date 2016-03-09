@@ -19,30 +19,37 @@ class FriendController extends Controller
 
         $result = DB::select('
             SELECT 
-              (SELECT COUNT(reserves.*)  
+              (SELECT COUNT(*)  
               FROM reserves 
               WHERE reserves.facebook_id = :facebookid AND
               reserves.isConfirm = 1 AND
               reserves.isCheckIn = 1) 
               AS reservesAndPlay,
               
-              (SELECT COUNT(reserves.*)
+              (SELECT COUNT(*)
               FROM reserves
               WHERE reserves.facebook_id = :facebookid2 AND
               reserves.isConfirm = 1 AND 
               reserves.isCheckIn = 0)
               AS reservesAndMiss,
               
-              (SELECT COUNT(reserves.*) 
+              (SELECT COUNT(*) 
               FROM reserves
               WHERE reserves.facebook_id = :facebookid3)
-              AS allReserves
+              AS allReserves,
               
-              (SELECT COUNT(joins.*)
+              (SELECT COUNT(*)
               FROM joins
               WHERE joins.facebook_id = :facebookid4)
               AS allJoin
-              ', ['facebookid' =>$friendId, 'facebookid2' =>$friendId, 'facebookid3'=>$friendId, 'facebookid4'=>$friendId]);
+              ',
+            [
+                'facebookid' =>$user->facebook_id,
+                'facebookid2' =>$user->facebook_id,
+                'facebookid3'=>$user->facebook_id,
+                'facebookid4'=>$user->facebook_id
+            ]
+        );
 
         $user->reservesAndPlay = $result->reservesAndPlay;
         $user->reservesAndMiss = $result->reservesAndMiss;
