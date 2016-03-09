@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class FriendController extends Controller
 {
-    public function friendStat(){
+    public function getFriendStat(){
         $friendId = Input::get("id");
         $user = User::find($friendId);
         if(count($user) == 0)

@@ -40,3 +40,5 @@ Route::post('/myjoin', 'JoinController@getMyJoin');
 Route::post('/myjoin/delete', 'JoinController@deleteMyJoin');
 
 Route::post('/atr', 'ReserveController@AvailableToReserve');
+
+Route::post('/friend', 'FriendController@getFriendStat');
