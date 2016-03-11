@@ -33,7 +33,7 @@ class QuickController extends Controller
 
         foreach($data as $key=>$val){
             $users = DB::SELECT('
-                select users.name as name
+                select users.*
                 from users, joins
                 where
                   joins.reserve_id = :reserveid and

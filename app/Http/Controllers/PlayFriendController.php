@@ -37,7 +37,7 @@ class PlayFriendController extends Controller
 
             foreach((array)$result as &$re){
                 $peoples = DB::select('
-                  select users.name as name
+                  select users.*
                   from users, joins
                   where
                     joins.reserve_id = :reserveid and
