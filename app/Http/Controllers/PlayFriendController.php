@@ -30,7 +30,7 @@ class PlayFriendController extends Controller
                   fields.type = :type and
                   reserves.isconfirm = 1 and
                   reserves.date >= curdate() and
-                  (select count(*) from joins where joins.reserve_id = reserves.id and joins.facebook_id = :self1) != 1
+                  (select count(*) from joins where joins.reserve_id = reserves.id and joins.facebook_id = :self1) != 1 and
                   reserves.facebook_id = :friend
                   order by reserves.date asc
             ', ["self1"=>$user, "self2"=>$user, "friend"=>$friend->id, "type"=>$type]);
