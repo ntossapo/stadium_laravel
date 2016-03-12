@@ -68,7 +68,7 @@ class ReserveController extends Controller
             "time_to1"=>$timeTo, "time_to2"=>$timeTo, "time_to3"=>$timeTo, "time_to4"=>$timeTo, "time_to5"=>$timeTo, "time_to6"=>$timeTo, "time_to7"=>$timeTo,
             "type"=>$type]);
 
-        $query = "select fields.* from fields, stadiums";
+        $query = "select fields.*, avg(price_rate.price)) from fields, stadiums, price_rate";
         $params = [];
         $query .= ' WHERE ';
 
@@ -80,6 +80,7 @@ class ReserveController extends Controller
         }
         $query .= 'fields.type = :type and
          stadiums.id = fields.stadium_id and
+         fields.id = price_rate.field_id and
           stadiums.id = :stdid';
         $params["type"] = 'soccer';
         $params["stdid"] = $stadium;
