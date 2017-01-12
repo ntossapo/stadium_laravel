@@ -48,14 +48,26 @@ class FieldSeeder extends Seeder
         ]);
 
         DB::table('fields')->insert([
-            'name' => 'Soccer 1',
+            'name' => 'Badminton 1',
             'stadium_id' => 3,
+            'type' => 'badminton'
+        ]);
+
+        DB::table('fields')->insert([
+            'name' => 'Badminton 2',
+            'stadium_id' => 3,
+            'type' => 'badminton'
+        ]);
+
+        DB::table('fields')->insert([
+            'name' => 'Soccer 1',
+            'stadium_id' => 5,
             'type' => 'soccer'
         ]);
 
         DB::table('fields')->insert([
             'name' => 'Soccer 2',
-            'stadium_id' => 3,
+            'stadium_id' => 5,
             'type' => 'soccer'
         ]);
     }
